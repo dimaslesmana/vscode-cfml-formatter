@@ -2,7 +2,7 @@
 
 CFML formatter is a Visual Studio Code extension that provides formatting for CFML files using [Lucee Server](https://www.lucee.org/) and [CFFormat](https://github.com/jcberquist/commandbox-cfformat)
 
-Under the hood it uses a Lucee Language Server to provide the formatting capabilities. 
+Under the hood it uses a Lucee Language Server to provide the formatting capabilities.
 
 Why use this extension instad of the [CFFormat](https://www.forgebox.io/view/commandbox-cfformat) commandbox extension?
 
@@ -22,7 +22,7 @@ We are also including a new project, CFRules which allows a team to share file n
 So that you can manage how you want your code to be formatted, you can create a `.cfformat.json` file in the root of your project. You can read more about cfFormat [here](https://www.forgebox.io/view/commandbox-cfformat). An easy way to create `.cfformat.json` file is to run `box cfformat settings wizard" and it will generate the file for you.
 
 ### CFRules
-CFRules is a tiny project that allows you to control how your team writes code. You can create a `.cfrules.json` file in the root of your project and it will be picked up by the extension. 
+CFRules is a tiny project that allows you to control how your team writes code. You can create a `.cfrules.json` file in the root of your project and it will be picked up by the extension.
 
 The rules are split into workspace rules (which define the locations of files and folders) and file rules (which define rules around content in the files).
 
@@ -92,7 +92,7 @@ examples:
 
 - "type": "folder_not_allowed"
 - "path": relative path to the directory you want to check from the workspace root
-- "value": the folder name you want to check for. It will check sub folders too. 
+- "value": the folder name you want to check for. It will check sub folders too.
 - "severity": 1-4, 1 is an error, 2 is a warning,  3 is an information message and 4 is a hint.
 - "message": The message you want to display in the problems window
 - "href": A link to your documentation, to explain the rule to developers
@@ -110,8 +110,8 @@ TBD. See: https://github.com/cybersonic/vscode-cfml-formatter/issues/3
 - Node.js and npm
 - VS Code and vscx `npm install -g vsce`
 
-### Building and Packaging
-- Run `npm run vscode:pacakge`
+### Building and Packaging
+- Run `npm run vscode:package`
 
 This will create a cfml-formatter-0.0.1.vsix file in the root of the project. You can install this in VS Code by running `code --install-extension cfml-formatter-0.0.1.vsix`
 
@@ -119,11 +119,11 @@ This will create a cfml-formatter-0.0.1.vsix file in the root of the project. Yo
 
 The extension is split into a client (written in TypeScript) and a server (written in CFML). The client is responsible for handling the UI and sending requests to the server. The server is responsible for formatting the CFML code.
 
-The Server is a lucee server being run from [App.java](server/src/main/java/org/lucee/App.java) which is an embedded version of tomcat that is packaged up as a .jar file with the whole Language Server Code being written as a Lucee WAR and dynamically expanded. 
+The Server is a lucee server being run from [App.java](server/src/main/java/org/lucee/App.java) which is an embedded version of tomcat that is packaged up as a .jar file with the whole Language Server Code being written as a Lucee WAR and dynamically expanded.
 
 Each instance of VSCode will start it's own server on a different port. This is by design as VSCode extensions are responsible for the subprocess (running `java -jar resources/lucee_lsp-1.0-all.jar`) and start and stop instances with each new Workspace window that is opened.
 
-The client is responsible for sending  textDocument and workspace requests to the server and then handling the responses. The LSP is basically the "brains" of the extension and uses CFFormat and CFTokens to format the code as well as doing other functions that a LSP can do. 
+The client is responsible for sending  textDocument and workspace requests to the server and then handling the responses. The LSP is basically the "brains" of the extension and uses CFFormat and CFTokens to format the code as well as doing other functions that a LSP can do.
 
 ## Known Issues
 - We dont check for the java version and assume you have Java 11 installed, if you dont you will see an error in the output window
