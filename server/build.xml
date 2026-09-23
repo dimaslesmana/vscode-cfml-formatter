@@ -53,11 +53,32 @@
     </target>
 
     <!-- Task to build the JAR file -->
-    <target name="build-jar" depends="build-war">
+    <!-- <target name="build-jar" depends="build-war">
         <exec executable="${maven.command}" failonerror="true">
             <arg value="clean" />
             <arg value="package" />
         </exec>
+        <move todir="../resources/">
+            <fileset dir="target/">
+                <include name="*.jar" />
+            </fileset>
+        </move>
+    </target> -->
+    <target name="build-jar" depends="build-war">
+        <!-- Windows -->
+        <exec executable="cmd" osfamily="windows" failonerror="true">
+            <arg value="/c" />
+            <arg value="mvn" />
+            <arg value="clean" />
+            <arg value="package" />
+        </exec>
+
+        <!-- Unix/Linux/Mac -->
+        <exec executable="mvn" osfamily="unix" failonerror="true">
+            <arg value="clean" />
+            <arg value="package" />
+        </exec>
+
         <move todir="../resources/">
             <fileset dir="target/">
                 <include name="*.jar" />
